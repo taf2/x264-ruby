@@ -1,12 +1,11 @@
 require 'x264'
 
-puts X264.inspect
-puts X264::Encoder.inspect
+encoder = X264::Encoder.config do|e|
+  puts (e.public_methods - Object.public_methods).inspect
+  e.rc_bitrate = 300
+  e.rc_method = X264::RC_CQP
+end
 
-puts X264::Level.inspect
-puts X264::Picture.inspect
-puts X264::Nal.inspect
+#encoder.encode_frame_from_yuv(yuv)
 
-encoder = X264::Encoder.new({})
-
-encoder.reconfig {}
+puts "done"
